@@ -1,79 +1,60 @@
 <template>
-  <div>
-    <div class="header32121" :style="background||''">
-      <img class="header-logo-ic" />
-      <span class="header-title">{{ title || "标题" }}</span>
-      <div class="header-icon-ic" />
+  <div class="v-header">
+    <div class="v-header-actions" @click="onBack">
+      <span>返回</span>
     </div>
-    <div v-if="isFixed" style="height: 50px" />
+    <div class="v-header-title">首页</div>
+    <div class="v-header-actions v-header-actions2" @click="onBack">
+      <span>返回</span>
+    </div>
   </div>
 </template>
-<script>
-/* eslint-disable */
-import { defineComponent } from "vue";
 
-export default defineComponent({
-  name: "Header",
-  props: {
-    icon: String,
-    back: Boolean,
-    title: String,
-    fixed: String,
-    background: String,
-    onBack: Function,
+<script setup>
+defineProps({
+  title: {
+    type: String,
+    required: true,
   },
-  setup(props) {
-    const isFixed = (props.fixed|| 'true') == "true"
-    function onBack() {
-      if (props.onBack) {
-        props.onBack();
-      }
-    }
-    function onShare() {}
-
-    return {
-      isFixed,
-      onBack,
-      onShare,
-    };
+  actions: {
+    type: Array,
+    default: () => [],
   },
 });
+
+function onBack() {
+  console.log('onBack');
+}
+
 </script>
+
 <style scoped>
-.header32121 {
-  top: 0;
-  position: fixed;
-  z-index: 9999;
-  width: 100%;
+.v-header {
+  width: 100vw;
   height: 50px;
-  max-height: 50px;
+  top: 0;
+  left: 0;
+  z-index: 997;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ff9900;
+}
+
+.v-header-title {
+  color: #232323;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.v-header-actions {
+  min-width: 64px;
+  margin: 0 16px;
   display: flex;
   align-items: center;
-  background-color: black;
-  transition: all 0.2s ease-in-out;
-  /* background: linear-gradient(0, #f7b332, #fa7724); */
 }
-.header32121:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
-}
-.header-logo-ic {
-  width: 32px;
-  height: 32px;
-  margin-left: 16px;
-  background-color: white;
-}
-.header-title {
-  flex: 1;
-  margin-left: 24px;
-  font-weight: 500;
-  font-size: 18px;
-  color: white;
-}
-.header-icon-ic {
-  width: 32px;
-  height: 32px;
-  margin-right: 16px;
-  background-color: white;
+.v-header-actions2 {
+  justify-content: flex-end;
 }
 </style>
