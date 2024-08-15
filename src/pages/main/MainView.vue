@@ -1,22 +1,30 @@
 <template>
   <div class="main-view">
-    <Header />
-    <router-view class="tab-page" v-slot="{ Component }">
+    <Toolbar v-if="activeTab < 2"/>
+    <router-view class="main-page" v-slot="{ Component }">
       <keep-alive>
         <component :is="Component" />
       </keep-alive>
     </router-view>
-    <div class="row tab-layout">
-      <router-link class="tab-link" to="/home">Login</router-link>
-      <router-link class="tab-link" to="/hot">Hot</router-link>
-      <router-link class="tab-link" to="/my">My</router-link>
-    </div>
+    <BottomTab :onChangeTab="onChangeTab"/>
   </div>
 </template>
 
 <script setup>
-// import { RouterView, RouterLink } from "vue-router";
-import Header from '../../components/Header.vue'
+import { onMounted, ref } from 'vue';
+import BottomTab from '@/components/BottomTab.vue';
+import Toolbar from '@/components/Toolbar.vue';
+
+const activeTab = ref(0);
+
+onMounted(() => {
+  console.log('onMounted ---> MainView');
+});
+
+function onChangeTab(tab) {
+  console.log('onTabClick', tab);
+  activeTab.value = parseInt(tab);
+}
 </script>
 
 <style scoped>
@@ -26,27 +34,9 @@ import Header from '../../components/Header.vue'
   flex-direction: column;
   position: relative;
 }
-.tab-page {
+.main-page {
   flex: 1;
   display: flex;
   flex-direction: column;
-}
-.tab-layout {
-  height: 56px;
-  border-top: solid 1px #e0e0e0;
-  align-items: center;
-  background-color: white;
-}
-.tab-link {
-  flex: 1;
-  padding: 12px 0;
-
-  color: #000;
-  font-size: 20px;
-  font-weight: 500;
-  text-align: center;
-  text-decoration: none;
-
-  cursor: pointer;
 }
 </style>

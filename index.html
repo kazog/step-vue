@@ -7,18 +7,19 @@
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Web app"/>
     <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
-    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
+    <link rel="manifest" href="/manifest.json" />
     <title>App</title>
   </head>
   <body>
     <div id="app"></div>
-    <div id="popup"></div>
+    <div id="popups"></div>
+    <div id="loading"></div>
 
-    <script>
+    <!-- <script>
       window.onerror = function(message, source, lineno, colno, error) {
-        console.error('------> global err:', message, 'Source:', source, 'Line:', lineno, 'Column:', colno, 'Stack trace:', error.stack);
+        console.error('------ window onerror:', message, 'Source:', source, 'Line:', lineno, 'Column:', colno, 'Stack trace:', error.stack);
       };
-    </script>
+    </script> -->
 
     <script type="module" src="/src/main.js"></script>
   </body>

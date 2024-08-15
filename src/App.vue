@@ -1,11 +1,3 @@
-<template>
-  <router-view />
-  <!-- <router-view v-slot="{ Component }">
-    <transition name="fade">
-      <component :is="Component" />
-    </transition>
-  </router-view> -->
-</template>
 <script setup>
 import { RouterView } from "vue-router";
 /**
@@ -28,5 +20,14 @@ import { RouterView } from "vue-router";
  * 
  */
 </script>
+
+<template>
+  <router-view />
+  <!-- <router-view v-slot="{ Component }">
+    <transition name="fade">
+      <component :is="Component" />
+    </transition>
+  </router-view> -->
+</template>
 
 <style scoped></style>

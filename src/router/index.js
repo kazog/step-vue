@@ -9,10 +9,15 @@
     router.push({ name: 'search', query: { ...route.query, id: 1} })
 
     const id = route.params.id
- * 
  */
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, createWebHashHistory } from "vue-router";
 import LaunchView from "../pages/LaunchView.vue";
+
+/**
+ * 获取路由权限
+ * 匹配用户权限
+ * 注册路由
+ */
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,8 +34,8 @@ const router = createRouter({
   },
   routes: [
     // {
-    //   path: "",
-    //   name: "launch",
+    //   path: "launch",
+    //   name: "Launch",
     //   component: LaunchView,
     // },
     {
@@ -80,6 +85,12 @@ const router = createRouter({
       component: () => import("../pages/account/LoginView.vue"),
     },
     {
+      path: "/test",
+      name: "Test",
+      meta: { title: "test", hidden: true },
+      component: () => import("../pages/warn/TestView.vue"),
+    },
+    {
       path: "/notfound",
       name: "Notfound",
       meta: { transition: "slide-left" },
@@ -93,5 +104,18 @@ const router = createRouter({
     },
   ],
 });
+
+/**
+ * 重置路由
+ */
+export function resetRouter() {
+  const newRouter = createRouter({
+    history: createWebHashHistory(),
+    scrollBehavior: () => ({ left: 0, top: 0 }),
+    strict: true,
+    routes: [],
+  });
+  router.matcher = newRouter.matcher;
+}
 
 export default router;

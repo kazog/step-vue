@@ -1,38 +1,90 @@
 <template>
- <div class="my">
-    <h1>首页</h1>
+  <div class="home">
+    <img class="home-banner" src="https://picsum.photos/1920/1080" alt="home-bg" />
+    <div class="home-menus">
+      <template v-for="item in menuList" :key="item.id">
+        <div class="menu-box">{{ item.title }}</div>
+      </template>
+    </div>
+    <div class="home-grid">
+      <template v-for="item in itemList" :key="item.id">
+        <div class="home-box">{{ item.title }}</div>
+      </template>
+    </div>
   </div>
 </template>
 
 <script setup>
-  import { ref } from 'vue';
+import { onMounted, onActivated, onDeactivated, ref } from "vue";
+
+const menuList = ref([
+  {id: 0, title: '', desc: '', img: ''},
+  {id: 0, title: '', desc: '', img: ''},
+  {id: 0, title: '', desc: '', img: ''},
+  {id: 0, title: '', desc: '', img: ''},
+]);
+const itemList = ref([
+  {id: 0, title: '', desc: '', img: ''},
+  {id: 0, title: '', desc: '', img: ''},
+  {id: 0, title: '', desc: '', img: ''},
+  {id: 0, title: '', desc: '', img: ''},
+  {id: 0, title: '', desc: '', img: ''},
+  {id: 0, title: '', desc: '', img: ''},
+  {id: 0, title: '', desc: '', img: ''},
+]);
+
+onMounted(() => {
+  console.log("onMounted ---> HomeView");
+
+});
+
+onActivated(() => {
+  console.log("onActivated ---> HomeView");
+});
+
+onDeactivated(() => {
+  console.log("onDeactivated ---> HomeView");
+});
 
 </script>
 
 <style scoped>
 .home {
-  /* flex: 1;
-  display: flex;
-  flex-direction: column;
+  height: 100%;
+  overflow: scroll;
   position: relative;
-  background-color: bisque; */
-  /* background-color: rgba(0, 0, 0, 0.8); */
 }
-.home-img-bg {
-  width: 100vw;
-  height: 100vh;
+.home-banner {
+  height: 120px;
+  margin: 0 12px;
+  border-radius: 8px;
   object-fit: cover;
 }
 
-.home-grid {
+.home-menus {
+  margin: 16px 12px;
   display: grid;
+  grid-row-gap: 12px;
+  grid-column-gap: 12px;
   grid-template-columns: repeat(4, 1fr);
 }
 
-.home-box {
-  width: 100px;
-  height: 200px;
-  background-color: antiquewhite;
+.menu-box {
+  height: 64px;
+  border-radius: 8px;
+  background-color: orchid;
+}
+.home-grid {
+  margin: 0 12px;
+  display: grid;
+  grid-row-gap: 12px;
+  grid-column-gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
 }
 
+.home-box {
+  height: 200px;
+  border-radius: 8px;
+  background-color: orchid;
+}
 </style>

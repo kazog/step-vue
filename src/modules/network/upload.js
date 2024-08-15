@@ -6,7 +6,42 @@ import { requestUrl } from "./config";
 import { httpClient } from "./axios";
 
 // 上传多文件
-export function uploadImgs(files = []) {}
+export function uploadImgs(files = []) {
+  return new Promise((resolve) => {
+    if (!files || files.length == 0) {
+      resolve({ code: -1000, msg: "文件不能为空", data: null });
+      return;
+    }
+    const uploadUrl = 'http://192.168.242.219:8093/file/uploads';
+    const body = new FormData();
+    // body.append("bucket", "bajanju-p");
+    files.forEach((file) => {
+      body.append("files", file);
+    });
+
+    fetch(uploadUrl, {
+      body,
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        console.log("uploadImgs resolve ", res);
+        if (res) {
+          if (res.code == "1") {
+            resolve({ code: 0, msg: "ok", data: res.data });
+          } else {
+            resolve({ code: res.code, data: null, msg: res.returnMsg });
+          }
+        } else {
+          resolve({ code: -1001, msg: "", data: null });
+        }
+      })
+      .catch((err) => {
+        console.log("uploadImgs Error ", err);
+        resolve({ code: -1002, msg: "", data: null });
+      });
+  });
+}
 
 // 上传文件
 export function uploadImg({ file, url, params = {}, method = "POST" } = {}) {
@@ -92,4 +127,22 @@ export async function download(url) {
     console.log(err);
     return null;
   });
+  // try {
+      // const a = document.createElement("a")
+      // a.href = path
+      // a.download = fileName
+      // document.body.appendChild(a)
+      // a.click()
+      // document.body.removeChild(a)
+
+      // const iframe = document.createElement("iframe")
+      // iframe.style.display = "none"
+      // iframe.src = `javascript: '<script>location.href="${path}"</script>'`
+      // document.body.appendChild(iframe)
+      // setTimeout(() => {
+      //   document.body.removeChild(iframe)
+      // }, 6000)
+    // } catch (e) {
+    //   console.log("downloadFile catch", e)
+    // }
 }

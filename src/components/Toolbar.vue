@@ -1,23 +1,24 @@
 <template>
-  <div class="v-header">
-    <div class="v-header-btn" @click="onBack">
-      <!-- <img class="v-header-logo" src="{logoIcon}" /> -->
-      <span class="v-header-name">网站</span>
+  <div class="v-toolbar">
+    <div class="v-toolbar-action" @click="onBack">
+      <span class="v-toolbar-back">返回</span>
     </div>
-    <ul class="v-header-tab" @click="onClickTab">
-      <li id="home" class="v-header-tab-li">首页</li>
-      <li id="goods" class="v-header-tab-li">产品</li>
-      <li id="about" class="v-header-tab-li">关于</li>
-      <li id="contact" class="v-header-tab-li">联系</li>
-    </ul>
+    <span class="v-toolbar-title">标题</span>
+    <div class="v-toolbar-action v-toolbar-actions">
+      <span class="v-toolbar-menu">菜单</span>
+    </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
-  msg: {
+const props = defineProps({
+  title: {
     type: String,
-    required: true,
+    required: false,
+  },
+  actions: {
+    type: Array,
+    required: false,
   },
 });
 
@@ -25,58 +26,45 @@ function onBack() {
   console.log('onBack');
 }
 
-function onClickTab(e) {
-  const id = e.target.id;
-    if (props.onChange) {
-      props.onChange(id);
-    }
+function onMenuTap(e) {
+
 }
 </script>
 
 <style scoped>
-.v-header {
+.v-toolbar {
   width: 100vw;
-  height: 56px;
+  height: 50px;
   top: 0;
   left: 0;
   z-index: 3;
-  position: fixed;
+  position: sticky;
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: white;
+  border-bottom: solid 1px #f3f3f3;
 }
 
-.v-header-btn {
-  margin-left: 24px;
+.v-toolbar-action {
+  width: 25vw;
   display: flex;
   align-items: center;
 }
-.v-header-logo {
-  width: 24px;
-  height: 24px;
-}
-.v-header-name {
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  margin-left: 8px;
-}
-.v-header-tab {
-  flex: 1;
-  display: flex;
-  align-items: center;
+.v-toolbar-actions {
   justify-content: flex-end;
-  padding: 0 6vw 0 0;
-  column-gap: 64px;
 }
-.v-header-tab-li {
-  color: white;
+.v-toolbar-title {
+  width: 50vw;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 500;
+  text-align: center;
+}
+.v-toolbar-menu {
+  font-size: 14px;
 }
 
-.v-header-height {
-  width: 1px;
-  min-height: 56px;
+.v-toolbar-height {
+  height: var(--toolbar-height);
 }
 </style>
