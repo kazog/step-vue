@@ -3,7 +3,7 @@
     <img class="home-banner" src="https://picsum.photos/1920/1080" alt="home-bg" />
     <div class="home-menus">
       <template v-for="item in menuList" :key="item.id">
-        <div class="menu-box">{{ item.title }}</div>
+        <div class="menu-box" @click="download">{{ item.title }}</div>
       </template>
     </div>
     <div class="home-grid">
@@ -46,6 +46,20 @@ onDeactivated(() => {
   console.log("onDeactivated ---> HomeView");
 });
 
+function download() {
+  const path = "51f3e4829";
+  try {
+      const a = document.createElement("a")
+      a.href = path
+      a.download = 'fileName'
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+  } catch (e) {
+     console.log("downloadFile catch", e)
+  }
+}
+
 </script>
 
 <style scoped>
@@ -86,5 +100,8 @@ onDeactivated(() => {
   height: 200px;
   border-radius: 8px;
   background-color: orchid;
+}
+.home-video {
+  height: 500px;
 }
 </style>

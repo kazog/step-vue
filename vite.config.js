@@ -25,7 +25,7 @@ export default defineConfig({
   },
   css: {
     postcss: {
-      plugins: [pxToRem],
+      // plugins: [pxToRem],
     },
   },
   server: {

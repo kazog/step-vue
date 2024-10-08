@@ -8,7 +8,7 @@
 window.addEventListener('load', function () {
   // 设备信息
   const device = {
-    agent: navigator.userAgent,
+    // agent: navigator.userAgent,
     platform: navigator.platform||'',
     vendor: navigator.vendor,
     appVersion: navigator.appVersion,
