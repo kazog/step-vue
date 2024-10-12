@@ -8,7 +8,7 @@
  */
 const { generateVersion, writeVersion, importToCommonJs } = require("./utils")
 const path = require("node:path")
-const { ossUpload } = require("./oss")
+// const { ossUpload } = require("./oss")
 const inquirerES = importToCommonJs("inquirer")
 
 const sourcePath = path.resolve(__dirname, "../dist") // 文件路径
@@ -23,7 +23,7 @@ const choices = ["dev", "test", "uat", "prod"] // 发布环境 -不推荐设置p
 // 读取环境变量 -manifest.json(deploy中写入的)
 
 // 获取环境 -通过命令行参数
-let tagEnv = process.argv[2]
+let tagEnv = manifest.env || process.argv[2]
 
 if (tagEnv && choices.includes(tagEnv)) {
   deployApp(tagEnv)
@@ -57,7 +57,8 @@ async function startDeploy(env) {
   const version = generateVersion(manifest[env] || appInfo.version)
   writeVersion(sourceManifestDir, env, version);
 
-  const upload = await ossUpload(manifest.name, sourcePath, env)
+  const upload = false;
+  // const upload = await ossUpload(manifest.name, sourcePath, env)
 
   if (upload) {
     console.log(`\n****** ${manifest.name}(${env}, V${version}) succeed ******\n`)

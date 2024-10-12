@@ -14,7 +14,8 @@ const path = require("node:path");
 const { importToCommonJs } = require("./utils");
 const inquirerES = importToCommonJs("inquirer");
 
-// const appInfo = require("../package.json");
+const manifestDir = path.resolve(__dirname, "../public/manifest.json")
+const manifest = require("../public/manifest.json");
 // const envInfo = dotenv.parse(fs.readFileSync(".env"));
 
 const choices = ["dev", "test", "uat", "prod"];
@@ -61,6 +62,8 @@ function deployApp(env) {
   fs.writeFileSync(".env", envKeys);
 
   // 写入需要打包的环境 -manifest.json
+  manifest.env = env;
+  fs.writeFileSync(manifestDir, JSON.stringify(manifest, null, 2), 'utf-8');
 
   console.log(`<------------------ deploy  ${env}  end ------------------>`);
   // 开始编译项目
