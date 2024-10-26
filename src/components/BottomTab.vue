@@ -1,14 +1,14 @@
 <template>
   <div class="tab-layout">
-    <router-link :class="`tab-link ${curTab == 0 ? 'active':''}`" to="/home" @click="onItemTap(0)">
+    <router-link :class="`tab-link ${curTab == 0 ? 'active':''}`" to="/main/home" @click="onItemTap(0)">
       <img :class="`tab-link-icon ${curTab == 0 ? 'active':''}`" />
       <span>Home</span>
     </router-link>
-    <router-link :class="`tab-link ${curTab == 1 ? 'active':''}`" to="/hot" @click="onItemTap(1)">
+    <router-link :class="`tab-link ${curTab == 1 ? 'active':''}`" to="/main/hot" @click="onItemTap(1)">
       <img :class="`tab-link-icon ${curTab == 1 ? 'active':''}`" />
       <span>Hot</span>
     </router-link>
-    <router-link :class="`tab-link ${curTab == 2 ? 'active':''}`" to="/my" @click="onItemTap(2)">
+    <router-link :class="`tab-link ${curTab == 2 ? 'active':''}`" to="/main/my" @click="onItemTap(2)">
       <img :class="`tab-link-icon ${curTab == 2 ? 'active':''}`" />
       <span>My</span>
     </router-link>

@@ -21,30 +21,31 @@ const choices = ["dev", "test", "uat", "prod"] // 发布环境 -不推荐设置p
 // console.log('------> options', process.argv);
 
 // 读取环境变量 -manifest.json(deploy中写入的)
+deployApp(manifest.env);
 
 // 获取环境 -通过命令行参数
-let tagEnv = manifest.env || process.argv[2]
+// let tagEnv = manifest.env || process.argv[2]
 
-if (tagEnv && choices.includes(tagEnv)) {
-  deployApp(tagEnv)
-} else {
-  // 选择环境
-  inquirerES.then((res) => {
-    const inquirer = res.default || {}
-    inquirer
-      .prompt([
-        {
-          type: "rawlist",
-          name: "env",
-          message: "选择发布环境?",
-          choices
-        }
-      ])
-      .then((answer) => {
-        deployApp(answer.env)
-      })
-  })
-}
+// if (tagEnv && choices.includes(tagEnv)) {
+//   deployApp(tagEnv)
+// } else {
+//   // 选择环境
+//   inquirerES.then((res) => {
+//     const inquirer = res.default || {}
+//     inquirer
+//       .prompt([
+//         {
+//           type: "rawlist",
+//           name: "env",
+//           message: "选择发布环境?",
+//           choices
+//         }
+//       ])
+//       .then((answer) => {
+//         deployApp(answer.env)
+//       })
+//   })
+// }
 
 // 部署应用
 function deployApp(env) {

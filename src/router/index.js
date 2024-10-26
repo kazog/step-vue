@@ -33,33 +33,34 @@ const router = createRouter({
     // return new Promise((resolve, reject) => { setTimeout(() => { resolve({ left: 0, top: 0 }); }, 500) });
   },
   routes: [
-    // {
-    //   path: "launch",
-    //   name: "Launch",
-    //   component: LaunchView,
-    // },
     {
       path: "/",
+      // redirect: "/",
+      name: "Launch",
+      component: LaunchView,
+    },
+    {
+      path: "/main",
       name: "Main",
-      redirect: "/home",
+      // redirect: "/home",
       component: () => import("../pages/main/MainView.vue"),
       children: [
         {
           path: "home",
           name: "Home",
-          meta: { transition: "slide-left" },
+          meta: { transition: "slide-left", title: "首页" },
           component: () => import("../pages/main/HomeView.vue"),
         },
         {
           path: "hot",
           name: "Hot",
-          meta: { transition: "slide-left" },
+          meta: { transition: "slide-left", title: "热门" },
           component: () => import("../pages/main/HotView.vue"),
         },
         {
           path: "my",
           name: "My",
-          meta: { transition: "slide-left" },
+          meta: { transition: "slide-left", title: "我的" },
           component: () => import("../pages/main/MyView.vue"),
         },
         {
@@ -79,10 +80,88 @@ const router = createRouter({
       ]
     },
     {
+      path: "account",
+      name: "Account",
+      meta: { transition: "slide-left" },
+      // component: () => import("../components/layout/Layout.vue"),
+      children: [
+        {
+          path: "info",
+          name: "Info",
+          meta: { transition: "slide-left", title: "个人信息" },
+          component: () => import("../pages/account/UserView.vue"),
+        },
+      ],
+    },
+    {
+      path: "order",
+      name: "Order",
+      meta: { transition: "slide-left" },
+      // component: () => import("../components/layout/Layout.vue"),
+      children: [
+        {
+          path: "/",
+          name: "List",
+          meta: { transition: "slide-left", title: "订单列表" },
+          component: () => import("../pages/order/List.vue"),
+        },
+        {
+          path: "detail",
+          name: "Detail",
+          meta: { transition: "slide-left", title: "订单详情" },
+          component: () => import("../pages/order/Detail.vue"),
+        },
+        {
+          path: "refund",
+          name: "Refund",
+          meta: { transition: "slide-left", title: "退款" },
+          component: () => import("../pages/order/Refund.vue"),
+        },
+      ],
+    },
+    {
+      path: "product",
+      name: "Product",
+      meta: { transition: "slide-left" },
+      // component: () => import("../components/layout/Layout.vue"),
+      children: [
+        {
+          path: "/",
+          name: "List",
+          meta: { transition: "slide-left", title: "商品列表" },
+          component: () => import("../pages/product/List.vue"),
+        },
+        {
+          path: "detail",
+          name: "Detail",
+          meta: { transition: "slide-left", title: "商品详情" },
+          component: () => import("../pages/product/Detail.vue"),
+        },
+        {
+          path: "search",
+          name: "Search",
+          meta: { transition: "slide-left", title: "商品搜索" },
+          component: () => import("../pages/product/Search.vue"),
+        },
+      ],
+    },
+    {
       path: "/login",
       name: "Login",
       meta: { transition: "slide-left" },
       component: () => import("../pages/account/LoginView.vue"),
+    },
+    {
+      path: "/register",
+      name: "Register",
+      meta: { transition: "slide-left" },
+      component: () => import("../pages/account/Register.vue"),
+    },
+    {
+      path: "/reset",
+      name: "Reset",
+      meta: { transition: "slide-left" },
+      component: () => import("../pages/account/Reset.vue"),
     },
     {
       path: "/test",
