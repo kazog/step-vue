@@ -40,13 +40,13 @@ const router = createRouter({
       component: LaunchView,
     },
     {
-      path: "/main",
+      path: "/home",
       name: "Main",
       // redirect: "/home",
       component: () => import("../pages/main/MainView.vue"),
       children: [
         {
-          path: "home",
+          path: "",
           name: "Home",
           meta: { transition: "slide-left", title: "首页" },
           component: () => import("../pages/main/HomeView.vue"),
@@ -80,7 +80,7 @@ const router = createRouter({
       ]
     },
     {
-      path: "account",
+      path: "/account",
       name: "Account",
       meta: { transition: "slide-left" },
       // component: () => import("../components/layout/Layout.vue"),
@@ -94,7 +94,7 @@ const router = createRouter({
       ],
     },
     {
-      path: "order",
+      path: "/order",
       name: "Order",
       meta: { transition: "slide-left" },
       // component: () => import("../components/layout/Layout.vue"),
@@ -120,13 +120,13 @@ const router = createRouter({
       ],
     },
     {
-      path: "product",
+      path: "/product",
       name: "Product",
       meta: { transition: "slide-left" },
       // component: () => import("../components/layout/Layout.vue"),
       children: [
         {
-          path: "/",
+          path: "",
           name: "List",
           meta: { transition: "slide-left", title: "商品列表" },
           component: () => import("../pages/product/List.vue"),

@@ -8,7 +8,7 @@
     </div>
     <div class="home-grid">
       <template v-for="item in itemList" :key="item.id">
-        <div class="home-box">{{ item.title }}</div>
+        <div class="home-box" @click="gotoDetail">{{ item.title }}</div>
       </template>
     </div>
   </div>
@@ -16,6 +16,9 @@
 
 <script setup>
 import { onMounted, onActivated, onDeactivated, ref } from "vue";
+import {useRouter} from "vue-router";
+
+const router = useRouter();
 
 const menuList = ref([
   {id: 0, title: '', desc: '', img: ''},
@@ -60,6 +63,12 @@ function download() {
   }
 }
 
+
+function gotoDetail() {
+  console.log('gotoDetail');
+  router.push({path: '/product/detail', query: {id: 1}});
+}
+
 </script>
 
 <style scoped>
@@ -70,7 +79,7 @@ function download() {
 }
 .home-banner {
   height: 120px;
-  margin: 0 12px;
+  margin: 12px 12px 0 12px;
   border-radius: 8px;
   object-fit: cover;
 }
