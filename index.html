@@ -15,11 +15,14 @@
     <div id="popups"></div>
     <div id="loading"></div>
 
-    <!-- <script>
+    <script>
       window.onerror = function(message, source, lineno, colno, error) {
         console.error('------ window onerror:', message, 'Source:', source, 'Line:', lineno, 'Column:', colno, 'Stack trace:', error.stack);
       };
-    </script> -->
+      function setH5Auth(info) {
+        window.localStorage.setItem('app-user', info);
+      }
+    </script>
 
     <script type="module" src="/src/main.js"></script>
   </body>
